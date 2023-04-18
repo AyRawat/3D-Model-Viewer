@@ -8,12 +8,12 @@ export default function FileComponent() {
   const navigate = useNavigate();
   const submit = async (event) => {
     event.preventDefault();
-    console.log("Details about file", file);
+
     let file_name = file.name;
     let file_ext = file_name.slice(file_name.lastIndexOf(".") + 1);
-    console.log("The File Extension", file_ext);
+
     let mimeType = "model/" + file_ext + "+json";
-    console.log("the MimeType", mimeType);
+
     const fileData = {
       name: file_name,
       mimeType: mimeType,
@@ -29,7 +29,7 @@ export default function FileComponent() {
       data.append("description", description);
       data.append("mimetype", fileData.mimeType);
       data.append("file", fileData.file);
-      console.log(data.get("data"));
+
       const result = await axios.post(
         "http://localhost:8000/api/saveModel",
         data,

@@ -27,7 +27,6 @@ const ShowCase = () => {
           "Successfully Called the API and data is downloaded",
           result
         );
-        console.log("name mimeType, description", result);
         setModel((prev) => {
           return {
             ...prev,

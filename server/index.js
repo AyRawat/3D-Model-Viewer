@@ -18,7 +18,6 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const url = MONGO_URI;
-console.log(url, PORT);
 mongoose.connect(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

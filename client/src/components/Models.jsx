@@ -4,7 +4,6 @@ import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 import CanvasLoader from "./Loader";
 
 const Model = ({ isMobile, name }) => {
-  console.log("The Name is", name);
   const sample = useGLTF("./scene.glb");
   return (
     <mesh>

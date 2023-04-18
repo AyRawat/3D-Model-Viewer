@@ -15,18 +15,16 @@ router.get("/getModel", async (req, res) => {
   try {
     let result = await FileModel.findOne().sort({ createdAt: -1 }).limit(1);
     if (result) {
-      console.log("Results", result);
       const filePath = path.join(
         path.dirname(new URL(import.meta.url).pathname),
         "../../client/public/scene.glb"
       );
-      console.log("This is the filepath", filePath);
+
       fs.writeFile(filePath, result.data, (err) => {
         if (err) {
           console.log("Failed to write file due to ", err);
           throw err;
         }
-        console.log("Successfully Written");
       });
       return res.status(200).json({
         name: result.filename,
@@ -43,16 +41,13 @@ router.get("/getModel", async (req, res) => {
 
 router.post("/saveModel", upload.single("file"), async (req, res) => {
   try {
-    console.log("The Req.file", req.file, req.body.name);
     if (!req.file) {
       return res.status(400).send("No file uploaded");
     }
     const file = req.file;
-    console.log(typeof file);
-    //  const fileData = new Readable();
+
     const fileData = Buffer.from(file.buffer);
-    // fileData.push(file.buffer);
-    // fileData.push(null);
+
     const result = new FileModel({
       filename: req.body.name,
       mimeType: req.body.mimetype,
